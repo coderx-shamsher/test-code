@@ -1,0 +1,1022 @@
+        /* General Reset & Variables */
+        :root {
+            --netflix-red: #e50914;
+            --netflix-dark: #141414;
+            --netflix-grey: #808080;
+            --text-color: #ffffff;
+            --light-grey: #f4f4f4;
+            --input-bg: rgba(45, 45, 45, 0.7);
+            --border-color: #333;
+            --faq-bg: #303030;
+            --link-color: #737373;
+            --gradient-start: rgba(0, 0, 0, 0.8);
+            --gradient-end: rgba(0, 0, 0, 0);
+            --gradient-bottom: rgba(0, 0, 0, 0.8);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            background-color: var(--netflix-dark);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        a {
+            color: var(--text-color);
+            text-decoration: none;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 4%;
+        }
+
+        /* Utility Classes */
+        .btn {
+            display: inline-block;
+            background: var(--netflix-red);
+            color: var(--text-color);
+            padding: 0.8rem 1.5rem;
+            border-radius: 3px;
+            text-align: center;
+            font-size: 1rem;
+            border: none;
+            cursor: pointer;
+            outline: none;
+            transition: background 0.2s ease;
+        }
+
+        .btn:hover {
+            background: #f4041a;
+        }
+
+        .text-center {
+            text-align: center;
+        }
+
+        /* Header */
+        .header {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 20px 0;
+            z-index: 10;
+        }
+
+        .header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            color: var(--netflix-red);
+            font-size: 2rem;
+            font-weight: bold;
+            letter-spacing: -1px;
+            margin-right: auto;
+            /* Pushes other elements to the right */
+        }
+
+        /* Netflix Logo SVG */
+        .logo svg {
+            fill: var(--netflix-red);
+            height: 2.5rem;
+            /* Adjust size as needed */
+            width: auto;
+        }
+
+        .header-nav {
+            display: flex;
+            align-items: center;
+        }
+
+        .language-select-wrapper {
+            position: relative;
+            margin-right: 15px;
+        }
+
+        .language-select {
+            background: var(--input-bg);
+            border: 1px solid var(--border-color);
+            color: var(--text-color);
+            padding: 8px 30px 8px 10px;
+            border-radius: 3px;
+            appearance: none;
+            /* Remove default arrow */
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            cursor: pointer;
+            font-size: 0.9rem;
+        }
+
+        /* Custom arrow for select */
+        .language-select-wrapper::after {
+            content: '▼';
+            /* Unicode down arrow */
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-color);
+            font-size: 0.7rem;
+            pointer-events: none;
+            /* Allows clicks to pass through to the select */
+        }
+
+        /* Hero Section */
+        .hero {
+            position: relative;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            background:
+                linear-gradient(to top, var(--gradient-bottom) 0%, transparent 50%),
+                linear-gradient(to bottom, var(--gradient-start) 0%, transparent 50%),
+                url('https://assets.nflxext.com/ffe/siteui/vlv3/d1532f38-da45-420a-9d62-a3ed062402f1/c76336e7-578f-43c3-8a30-22c608f6d71b/US-en-20231218-POP_SIGNUP_TWO_WEEKS_FREE_TRIAL_BIG_4/netflix_bg.jpg') no-repeat center center/cover;
+            /* Using a placeholder image for the background, replace with actual if available */
+        }
+
+        .hero::before {
+            /* Overlay to darken image */
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.4);
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 5;
+            max-width: 950px;
+            padding: 0 30px;
+        }
+
+        .hero-content h1 {
+            font-size: 3.5rem;
+            line-height: 1.1;
+            margin-bottom: 1rem;
+        }
+
+        .hero-content h2 {
+            font-size: 1.6rem;
+            font-weight: normal;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero-content p {
+            font-size: 1.2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .email-form {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+            /* Allow wrapping on small screens */
+        }
+
+        .email-form input[type="email"] {
+            padding: 1rem 1.2rem;
+            width: 450px;
+            max-width: 100%;
+            border: 1px solid var(--border-color);
+            background: var(--input-bg);
+            color: var(--text-color);
+            border-radius: 3px;
+            font-size: 1rem;
+        }
+
+        .email-form input[type="email"]::placeholder {
+            color: var(--netflix-grey);
+        }
+
+        .email-form .btn {
+            font-size: 1.6rem;
+            padding: 0.9rem 1.5rem;
+            min-width: 180px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
+        }
+
+        .email-form .btn svg {
+            height: 1.2rem;
+            width: auto;
+            fill: var(--text-color);
+        }
+
+        /* Curved Red Highlight Band - Reusing previous code */
+        .curved-highlight-section {
+            background-color: var(--netflix-dark);
+            position: relative;
+            overflow: hidden;
+            padding-top: 100px;
+            /* Adjust based on desired arc visibility */
+        }
+
+        .highlight-band-wrapper {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 25vh;
+            /* Control the height of the visible band */
+            overflow: hidden;
+        }
+
+        .highlight-band {
+            position: relative;
+            width: 100%;
+            height: 100%;
+        }
+
+        .highlight-band::before {
+            content: '';
+            position: absolute;
+            top: calc(-100vw + 5vh);
+            /* Adjust this to control the arc's curvature and height */
+            left: 50%;
+            transform: translateX(-50%);
+            width: 200vw;
+            /* Make it wider than viewport for smooth curve */
+            height: 200vw;
+            border-radius: 50%;
+            background: radial-gradient(circle at center,
+                    var(--netflix-red) 0%,
+                    #ff608f 40%,
+                    /* A slightly lighter pink for gradient */
+                    #ff608f 50%,
+                    transparent 50%);
+            z-index: 2;
+        }
+
+        .highlight-band::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(ellipse at top,
+                    rgba(0, 0, 0, 0.6) 0%,
+                    rgba(0, 0, 0, 0.4) 30%,
+                    rgba(0, 0, 0, 0) 70%);
+            mix-blend-mode: soft-light;
+            z-index: 1;
+        }
+
+        /* Horizontal Rule Separator */
+        .section-separator {
+            width: 100%;
+            height: 8px;
+            background-color: #222;
+            margin: 0;
+            /* Ensures it spans full width */
+            border: none;
+        }
+
+        /* Trending Now Section */
+        .trending-now {
+            padding: 50px 0;
+            background-color: var(--netflix-dark);
+            text-align: left;
+        }
+
+        .trending-now h2 {
+            font-size: 2.5rem;
+            margin-bottom: 30px;
+            padding-left: 4%;
+            /* Align with container text */
+        }
+
+        .trending-carousel-wrapper {
+            position: relative;
+            overflow-x: scroll;
+            /* Enables horizontal scrolling */
+            -webkit-overflow-scrolling: touch;
+            /* For smoother scrolling on iOS */
+            padding-bottom: 20px;
+            /* Space for scrollbar */
+            white-space: nowrap;
+            /* Prevents items from wrapping */
+            scroll-snap-type: x mandatory;
+            /* Optional: for snapping to items */
+            padding-left: 4%;
+            /* Visual padding for the first item */
+            padding-right: 4%;
+            /* Visual padding for the last item */
+        }
+
+        .trending-carousel-wrapper::-webkit-scrollbar {
+            height: 8px;
+        }
+
+        .trending-carousel-wrapper::-webkit-scrollbar-track {
+            background: var(--border-color);
+            border-radius: 10px;
+        }
+
+        .trending-carousel-wrapper::-webkit-scrollbar-thumb {
+            background: var(--netflix-red);
+            border-radius: 10px;
+        }
+
+        .trending-items {
+            display: inline-flex;
+            /* Lays items out horizontally */
+            gap: 15px;
+        }
+
+        .trending-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            flex: 0 0 auto;
+            /* Prevent items from shrinking/growing */
+            width: 200px;
+            /* Fixed width for carousel items */
+            scroll-snap-align: start;
+        }
+
+        .trending-item .number {
+            font-size: 8rem;
+            /* Large number */
+            font-weight: bold;
+            color: rgba(255, 255, 255, 0.1);
+            /* Very subtle white */
+            position: absolute;
+            left: -30px;
+            /* Overlap with image */
+            z-index: 1;
+            line-height: 0.8;
+            top: 50%;
+            transform: translateY(-50%);
+            -webkit-text-stroke: 4px var(--netflix-grey);
+            /* Outline effect */
+            /* text-stroke: 4px var(--netflix-grey); */
+            color: transparent;
+            /* Makes the fill transparent */
+        }
+
+        .trending-item-image-wrapper {
+            position: relative;
+            width: 100%;
+            padding-bottom: 150%;
+            /* Aspect ratio 2:3 */
+            overflow: hidden;
+            border-radius: 5px;
+            background-color: #222;
+            /* Placeholder background */
+        }
+
+        .trending-item-image-wrapper img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 5px;
+            z-index: 2;
+        }
+
+        /* More Reasons Section */
+        .more-reasons {
+            padding: 70px 0;
+            background-color: var(--netflix-dark);
+        }
+
+        .more-reasons .container {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+
+        .reason-card {
+            background-color: var(--faq-bg);
+            padding: 30px;
+            border-radius: 5px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            min-height: 200px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .reason-card h3 {
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+        }
+
+        .reason-card p {
+            font-size: 1.1rem;
+            color: var(--light-grey);
+            margin-bottom: 20px;
+        }
+
+        .reason-card svg {
+            position: absolute;
+            right: 20px;
+            bottom: 20px;
+            height: 60px;
+            width: auto;
+            opacity: 0.3;
+            fill: var(--netflix-red);
+            /* Icon color */
+        }
+
+        /* FAQ Section */
+        .faq {
+            padding: 70px 0;
+            background-color: var(--netflix-dark);
+            text-align: center;
+        }
+
+        .faq h2 {
+            font-size: 2.5rem;
+            margin-bottom: 40px;
+        }
+
+        .faq-list {
+            max-width: 750px;
+            margin: 0 auto;
+            text-align: left;
+        }
+
+        .faq-item {
+            margin-bottom: 10px;
+        }
+
+        .faq-question {
+            background-color: var(--faq-bg);
+            padding: 20px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 1.6rem;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .faq-question::after {
+            content: '+';
+            /* Plus icon */
+            font-size: 2.5rem;
+            transition: transform 0.2s ease;
+        }
+
+        /* Hidden checkbox for accordion functionality */
+        .faq-toggle {
+            display: none;
+        }
+
+        /* Show answer and rotate icon when checkbox is checked */
+        .faq-toggle:checked+.faq-question::after {
+            transform: rotate(45deg);
+        }
+
+        .faq-answer {
+            background-color: var(--faq-bg);
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-in-out, padding 0.3s ease-in-out;
+            padding: 0 30px;
+            font-size: 1.2rem;
+        }
+
+        .faq-toggle:checked~.faq-answer {
+            max-height: 500px;
+            /* Sufficiently large to reveal content */
+            padding: 20px 30px;
+            border-top: 1px solid var(--netflix-dark);
+            /* Separator line */
+            margin-top: 1px;
+        }
+
+        .faq-answer p:not(:last-child) {
+            margin-bottom: 1rem;
+        }
+
+        /* Email Form at bottom */
+        .bottom-email-form {
+            padding: 50px 0 70px;
+        }
+
+        .bottom-email-form p {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            color: var(--light-grey);
+        }
+
+        /* Footer */
+        .footer {
+            padding: 70px 0;
+            color: var(--link-color);
+            font-size: 0.9rem;
+            background-color: var(--netflix-dark);
+            /* Ensure consistent background */
+        }
+
+        .footer .container {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+
+        .footer p {
+            margin-bottom: 20px;
+            font-size: 1rem;
+        }
+
+        .footer-links {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .footer-links a {
+            color: var(--link-color);
+            font-size: 0.85rem;
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        .footer-links a:hover {
+            text-decoration: underline;
+        }
+
+        .footer .language-select-wrapper {
+            margin-bottom: 20px;
+            margin-right: 0;
+            /* Override header margin */
+        }
+
+        .footer .language-select {
+            background: var(--netflix-dark);
+            /* Darker background */
+            border: 1px solid var(--link-color);
+            color: var(--link-color);
+        }
+
+        .footer .language-select-wrapper::after {
+            color: var(--link-color);
+        }
+
+        .footer span {
+            font-size: 0.75rem;
+            color: var(--link-color);
+        }
+
+        /* Media Queries for Responsiveness */
+        @media (max-width: 960px) {
+            .hero-content h1 {
+                font-size: 3rem;
+            }
+
+            .hero-content h2 {
+                font-size: 1.4rem;
+            }
+
+            .email-form {
+                flex-direction: column;
+                align-items: center;
+                gap: 15px;
+            }
+
+            .email-form input[type="email"] {
+                width: 80%;
+            }
+
+            .email-form .btn {
+                font-size: 1.3rem;
+                padding: 0.7rem 1.2rem;
+                width: fit-content;
+            }
+
+            .trending-now h2,
+            .more-reasons h2,
+            .faq h2 {
+                font-size: 2rem;
+            }
+
+            .trending-item {
+                width: 160px;
+                /* Smaller carousel items */
+            }
+
+            .trending-item .number {
+                font-size: 6rem;
+                left: -20px;
+            }
+
+            .more-reasons .container {
+                grid-template-columns: 1fr;
+                /* Single column on smaller screens */
+            }
+
+            .faq-question {
+                font-size: 1.3rem;
+            }
+
+            .faq-answer {
+                font-size: 1.1rem;
+            }
+
+            .footer-links {
+                grid-template-columns: repeat(2, 1fr);
+                /* 2 columns for footer links */
+            }
+        }
+
+        @media (max-width: 600px) {
+            .header .logo svg {
+                height: 2rem;
+            }
+
+            .header-nav .btn {
+                padding: 0.5rem 0.8rem;
+                font-size: 0.8rem;
+            }
+
+            .language-select {
+                padding: 6px 25px 6px 8px;
+                font-size: 0.8rem;
+            }
+
+            .hero-content h1 {
+                font-size: 2.2rem;
+            }
+
+            .hero-content h2 {
+                font-size: 1.1rem;
+            }
+
+            .hero-content p {
+                font-size: 0.9rem;
+            }
+
+            .email-form input[type="email"] {
+                width: 90%;
+            }
+
+            .email-form .btn {
+                font-size: 1.1rem;
+                padding: 0.6rem 1rem;
+                width: 70%;
+                /* Make button wider on mobile */
+            }
+
+            .trending-now h2,
+            .more-reasons h2,
+            .faq h2 {
+                font-size: 1.8rem;
+            }
+
+            .trending-item {
+                width: 140px;
+                /* Even smaller carousel items */
+            }
+
+            .trending-item .number {
+                font-size: 5rem;
+                left: -15px;
+            }
+
+            .reason-card h3 {
+                font-size: 1.5rem;
+            }
+
+            .reason-card p {
+                font-size: 1rem;
+            }
+
+            .faq-question {
+                font-size: 1.1rem;
+                padding: 15px 20px;
+            }
+
+            .faq-question::after {
+                font-size: 2rem;
+            }
+
+            .faq-answer {
+                font-size: 0.9rem;
+                padding: 15px 20px;
+            }
+
+            .footer-links {
+                grid-template-columns: 1fr;
+                /* Single column for footer links */
+            }
+        }
+
+
+    /*  css for the section */
+
+     /* CSS for: /project-root/styles.css (embedded for convenience) */
+
+  /* Reset & base */
+  :root{
+    --bg:#050505;
+    --panel:#0b0b0b;
+    --accent1: linear-gradient(90deg,#ff2d55 0%, #d633ff 50%, #00b0ff 100%);
+    --muted: #bdbdbd;
+    --heading: #ffffff;
+    --gap: 36px;
+    --card-w: 220px; /* default card width */
+    --card-h: 320px;
+  }
+  *{box-sizing:border-box}
+  html,body{height:100%}
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--muted);
+    font-family: "Montserrat", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+    -webkit-font-smoothing:antialiased;
+    -moz-osx-font-smoothing:grayscale;
+    line-height:1.25;
+  }
+
+  /* Top ribbon / hero-like curved header */
+  .hero {
+    position:relative;
+    min-height:220px;
+    padding:48px 48px 36px;
+    overflow:visible;
+    background:
+      linear-gradient(180deg, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.80) 100%);
+    /* Decorative faint banner image (simulates the collage above the curve) */
+    background-image: linear-gradient(transparent, rgba(0,0,0,0.4));
+    display:flex;
+    align-items:flex-start;
+  }
+
+  /* Decorative curved band at the bottom of hero */
+  .hero::after{
+    content:"";
+    position:absolute;
+    left:0;
+    right:0;
+    bottom:-60px;
+    height:160px;
+    background: radial-gradient(1000px 180px at 50% 0%, rgba(140,20,180,0.35), rgba(0,0,0,0.1));
+    border-bottom-left-radius:60% 40%;
+    border-bottom-right-radius:60% 40%;
+    transform:translateY(0);
+    pointer-events:none;
+    filter: blur(6px);
+    mix-blend-mode:screen;
+  }
+
+  .container{
+    width:100%;
+    max-width:1200px;
+    margin:0 auto;
+    padding:0 24px;
+  }
+
+  /* Section title */
+  .trending-header{
+    color:var(--heading);
+    font-size:28px;
+    font-weight:700;
+    margin:10px 0 28px;
+    letter-spacing:0.2px;
+  }
+
+  /* Trending row (horizontal carousel-like) */
+  .trending-row{
+    display:flex;
+    gap:var(--gap);
+    overflow-x:auto;
+    padding:18px 12px 36px;
+    scroll-snap-type:x mandatory;
+    -webkit-overflow-scrolling:touch;
+    align-items:center;
+  }
+
+  /* hide default scrollbar in modern browsers, but leave space for accessibility */
+  .trending-row::-webkit-scrollbar{height:10px}
+  .trending-row::-webkit-scrollbar-thumb{
+    background:linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,0.02));
+    border-radius:999px;
+  }
+
+  /* Each poster card */
+  .movie {
+    scroll-snap-align:center;
+    flex:0 0 auto;
+    width:var(--card-w);
+    position:relative;
+    display:block;
+    border-radius:14px;
+    overflow:hidden;
+    background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.15));
+    box-shadow:
+      0 10px 30px rgba(0,0,0,0.7),
+      inset 0 1px 0 rgba(255,255,255,0.02);
+    transition:transform .22s ease, box-shadow .22s ease;
+  }
+
+  /* On hover, pop slightly */
+  .movie:focus-within, .movie:hover{
+    transform:translateY(-8px) scale(1.02);
+    box-shadow:0 20px 40px rgba(0,0,0,0.8);
+  }
+
+  .movie img{
+    width:100%;
+    height:var(--card-h);
+    object-fit:cover;
+    display:block;
+    border-radius:12px;
+  }
+
+  /* Large outlined index number (e.g., 1,2,3...) */
+  .index {
+    position:absolute;
+    left:14px;
+    bottom:14px;
+    font-size:110px;
+    line-height:0.85;
+    font-weight:800;
+    color:transparent; /* using stroke-like look */
+    -webkit-text-stroke: 4px rgba(255,255,255,0.85);
+    text-shadow:
+      0 2px 0 rgba(0,0,0,0.8),
+      0 6px 18px rgba(0,0,0,0.8);
+    pointer-events:none;
+    mix-blend-mode:normal;
+  }
+
+  /* Small label overlay (optional), shows movie title */
+  .label {
+    position:absolute;
+    left:14px;
+    bottom:14px;
+    transform:translateY(64px);
+    color:rgba(255,255,255,0.95);
+    font-weight:600;
+    font-size:14px;
+    text-shadow:0 2px 10px rgba(0,0,0,0.8);
+    width:calc(var(--card-w) - 28px);
+    pointer-events:none;
+  }
+
+  /* Faint numeric overlay variant with outline & fill contrast for selected look */
+  .index--filled {
+    color: rgba(255,255,255,0.95);
+    -webkit-text-stroke: 3px rgba(0,0,0,0.85);
+    filter: drop-shadow(0 2px 6px rgba(0,0,0,0.5));
+  }
+
+  /* Right-side faux scrollbar / pill (visual only) */
+  .scroll-pill{
+    position:absolute;
+    right:18px;
+    top:50%;
+    transform:translateY(-50%);
+    width:36px;
+    height:110px;
+    background:linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));
+    border-radius:20px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:rgba(255,255,255,0.65);
+    font-size:22px;
+    box-shadow: 0 4px 18px rgba(0,0,0,0.6);
+  }
+
+  /* Responsive adjustments */
+  @media (max-width:1000px){
+    :root{--card-w:190px; --card-h:275px; --gap:28px}
+    .hero{min-height:180px;padding:36px 20px 28px}
+    .hero::after{bottom:-50px;height:120px}
+    .trending-header{font-size:24px}
+  }
+  @media (max-width:640px){
+    :root{--card-w:150px; --card-h:220px; --gap:18px}
+    .container{padding:0 16px}
+    .hero{padding:28px 12px}
+    .trending-header{font-size:20px}
+    .index{font-size:74px; -webkit-text-stroke:3px}
+    .scroll-pill{display:none}
+  }
+
+  /* Accessibility: keyboard focus visible */
+  .movie:focus-within{
+    outline:3px solid rgba(255,255,255,0.06);
+    outline-offset:6px;
+  }
+
+  /* CSS Code */
+
+/* Variables for easy color adjustments */
+:root {
+    --red-start: #ff003c; /* Bright, intense red */
+    --pink-end: #b8004b;  /* Deep, vibrant pink/crimson */
+    --vignette-color: #0d0d1b; /* Dark, deep color for the shadow/vignette */
+    --band-height: 15vh; /* Responsive height for the band */
+}
+
+/* Base container for the entire section */
+.highlight-container {
+    width: 100%;
+    /* Min-height to ensure the band is visible even if content is sparse */
+    min-height: var(--band-height); 
+    display: flex;
+    justify-content: center;
+    position: relative;
+    overflow: hidden; /* Crucial to clip the curved element */
+    background-color: var(--vignette-color); /* Matches the dark background in the image */
+}
+
+/* Main div to hold the visual elements (arc and shadow) */
+.highlight-band {
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+/* * ::before Pseudo-element: Creates the Curved Red Gradient Arc
+ * A radial-gradient is used with a very small radius (40% at center) to force 
+ * the shape into a large, outward-curving circle (at 50% / -200vw).
+ */
+.highlight-band::before {
+    content: '';
+    position: absolute;
+    /* Position the center of the "circle" far off the top of the viewport */
+    top: calc(-200vw + var(--band-height)); 
+    left: 50%;
+    transform: translateX(-50%); /* Center horizontally */
+    
+    /* Set a massive width to ensure the curve spans the entire viewport and more */
+    width: 400vw; 
+    /* Set a height that forms a complete circle with the top position */
+    height: 400vw; 
+    border-radius: 50%; /* Forms the perfect circle shape */
+    
+    /* Create the color gradient, transitioning from red (center) to pink (edge) */
+    background: radial-gradient(
+        circle at center, 
+        var(--red-start) 0%, 
+        var(--pink-end) 40%, 
+        var(--pink-end) 50%, 
+        transparent 50% /* Make the rest of the circle transparent */
+    );
+    
+    /* Ensure the content is visible above the dark vignette */
+    z-index: 2; 
+}
+
+/* * ::after Pseudo-element: Creates the Soft Dark Vignette/Shadow Effect
+ * This uses a radial-gradient to create a soft, dark blur that gives depth.
+ */
+.highlight-band::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%; /* Cover the entire container height */
+    
+    /* Radial gradient for the soft shadow effect, fading from dark to transparent */
+    background: radial-gradient(
+        ellipse at top, 
+        rgba(0, 0, 0, 0.6) 0%, /* Dark shadow near the arc */
+        rgba(0, 0, 0, 0.4) 30%, 
+        rgba(0, 0, 0, 0) 70% /* Fades out smoothly */
+    );
+    
+    /* Blend the colors subtly */
+    mix-blend-mode: soft-light; 
+    z-index: 1; 
+}
+

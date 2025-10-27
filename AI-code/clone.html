@@ -1,0 +1,365 @@
+<!-- File: /project-root/index.html -->
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Trending — Netflix Style Clone (HTML + CSS)</title>
+
+  <!-- Minimal font from Google for a clean, modern look -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500;700&display=swap" rel="stylesheet">
+
+  <style>
+  /* CSS for: /project-root/styles.css (embedded for convenience) */
+
+  /* Reset & base */
+  :root{
+    --bg:#050505;
+    --panel:#0b0b0b;
+    --accent1: linear-gradient(90deg,#ff2d55 0%, #d633ff 50%, #00b0ff 100%);
+    --muted: #bdbdbd;
+    --heading: #ffffff;
+    --gap: 36px;
+    --card-w: 220px; /* default card width */
+    --card-h: 320px;
+  }
+  *{box-sizing:border-box}
+  html,body{height:100%}
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--muted);
+    font-family: "Montserrat", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+    -webkit-font-smoothing:antialiased;
+    -moz-osx-font-smoothing:grayscale;
+    line-height:1.25;
+  }
+
+  /* Top ribbon / hero-like curved header */
+  .hero {
+    position:relative;
+    min-height:220px;
+    padding:48px 48px 36px;
+    overflow:visible;
+    background:
+      linear-gradient(180deg, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.80) 100%);
+    /* Decorative faint banner image (simulates the collage above the curve) */
+    background-image: linear-gradient(transparent, rgba(0,0,0,0.4));
+    display:flex;
+    align-items:flex-start;
+  }
+
+  /* Decorative curved band at the bottom of hero */
+  .hero::after{
+    content:"";
+    position:absolute;
+    left:0;
+    right:0;
+    bottom:-60px;
+    height:160px;
+    background: radial-gradient(1000px 180px at 50% 0%, rgba(140,20,180,0.35), rgba(0,0,0,0.1));
+    border-bottom-left-radius:60% 40%;
+    border-bottom-right-radius:60% 40%;
+    transform:translateY(0);
+    pointer-events:none;
+    filter: blur(6px);
+    mix-blend-mode:screen;
+  }
+
+  .container{
+    width:100%;
+    max-width:1200px;
+    margin:0 auto;
+    padding:0 24px;
+  }
+
+  /* Section title */
+  .trending-header{
+    color:var(--heading);
+    font-size:28px;
+    font-weight:700;
+    margin:10px 0 28px;
+    letter-spacing:0.2px;
+  }
+
+  /* Trending row (horizontal carousel-like) */
+  .trending-row{
+    display:flex;
+    gap:var(--gap);
+    overflow-x:auto;
+    padding:18px 12px 36px;
+    scroll-snap-type:x mandatory;
+    -webkit-overflow-scrolling:touch;
+    align-items:center;
+  }
+
+  /* hide default scrollbar in modern browsers, but leave space for accessibility */
+  .trending-row::-webkit-scrollbar{height:10px}
+  .trending-row::-webkit-scrollbar-thumb{
+    background:linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,0.02));
+    border-radius:999px;
+  }
+
+  /* Each poster card */
+  .movie {
+    scroll-snap-align:center;
+    flex:0 0 auto;
+    width:var(--card-w);
+    position:relative;
+    display:block;
+    border-radius:14px;
+    overflow:hidden;
+    background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.15));
+    box-shadow:
+      0 10px 30px rgba(0,0,0,0.7),
+      inset 0 1px 0 rgba(255,255,255,0.02);
+    transition:transform .22s ease, box-shadow .22s ease;
+  }
+
+  /* On hover, pop slightly */
+  .movie:focus-within, .movie:hover{
+    transform:translateY(-8px) scale(1.02);
+    box-shadow:0 20px 40px rgba(0,0,0,0.8);
+  }
+
+  .movie img{
+    width:100%;
+    height:var(--card-h);
+    object-fit:cover;
+    display:block;
+    border-radius:12px;
+  }
+
+  /* Large outlined index number (e.g., 1,2,3...) */
+  .index {
+    position:absolute;
+    left:14px;
+    bottom:14px;
+    font-size:110px;
+    line-height:0.85;
+    font-weight:800;
+    color:transparent; /* using stroke-like look */
+    -webkit-text-stroke: 4px rgba(255,255,255,0.85);
+    text-shadow:
+      0 2px 0 rgba(0,0,0,0.8),
+      0 6px 18px rgba(0,0,0,0.8);
+    pointer-events:none;
+    mix-blend-mode:normal;
+  }
+
+  /* Small label overlay (optional), shows movie title */
+  .label {
+    position:absolute;
+    left:14px;
+    bottom:14px;
+    transform:translateY(64px);
+    color:rgba(255,255,255,0.95);
+    font-weight:600;
+    font-size:14px;
+    text-shadow:0 2px 10px rgba(0,0,0,0.8);
+    width:calc(var(--card-w) - 28px);
+    pointer-events:none;
+  }
+
+  /* Faint numeric overlay variant with outline & fill contrast for selected look */
+  .index--filled {
+    color: rgba(255,255,255,0.95);
+    -webkit-text-stroke: 3px rgba(0,0,0,0.85);
+    filter: drop-shadow(0 2px 6px rgba(0,0,0,0.5));
+  }
+
+  /* Right-side faux scrollbar / pill (visual only) */
+  .scroll-pill{
+    position:absolute;
+    right:18px;
+    top:50%;
+    transform:translateY(-50%);
+    width:36px;
+    height:110px;
+    background:linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));
+    border-radius:20px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:rgba(255,255,255,0.65);
+    font-size:22px;
+    box-shadow: 0 4px 18px rgba(0,0,0,0.6);
+  }
+
+  /* Responsive adjustments */
+  @media (max-width:1000px){
+    :root{--card-w:190px; --card-h:275px; --gap:28px}
+    .hero{min-height:180px;padding:36px 20px 28px}
+    .hero::after{bottom:-50px;height:120px}
+    .trending-header{font-size:24px}
+  }
+  @media (max-width:640px){
+    :root{--card-w:150px; --card-h:220px; --gap:18px}
+    .container{padding:0 16px}
+    .hero{padding:28px 12px}
+    .trending-header{font-size:20px}
+    .index{font-size:74px; -webkit-text-stroke:3px}
+    .scroll-pill{display:none}
+  }
+
+  /* Accessibility: keyboard focus visible */
+  .movie:focus-within{
+    outline:3px solid rgba(255,255,255,0.06);
+    outline-offset:6px;
+  }
+
+  /* CSS Code */
+
+/* Variables for easy color adjustments */
+:root {
+    --red-start: #ff003c; /* Bright, intense red */
+    --pink-end: #b8004b;  /* Deep, vibrant pink/crimson */
+    --vignette-color: #0d0d1b; /* Dark, deep color for the shadow/vignette */
+    --band-height: 15vh; /* Responsive height for the band */
+}
+
+/* Base container for the entire section */
+.highlight-container {
+    width: 100%;
+    /* Min-height to ensure the band is visible even if content is sparse */
+    min-height: var(--band-height); 
+    display: flex;
+    justify-content: center;
+    position: relative;
+    overflow: hidden; /* Crucial to clip the curved element */
+    background-color: var(--vignette-color); /* Matches the dark background in the image */
+}
+
+/* Main div to hold the visual elements (arc and shadow) */
+.highlight-band {
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+/* * ::before Pseudo-element: Creates the Curved Red Gradient Arc
+ * A radial-gradient is used with a very small radius (40% at center) to force 
+ * the shape into a large, outward-curving circle (at 50% / -200vw).
+ */
+.highlight-band::before {
+    content: '';
+    position: absolute;
+    /* Position the center of the "circle" far off the top of the viewport */
+    top: calc(-200vw + var(--band-height)); 
+    left: 50%;
+    transform: translateX(-50%); /* Center horizontally */
+    
+    /* Set a massive width to ensure the curve spans the entire viewport and more */
+    width: 400vw; 
+    /* Set a height that forms a complete circle with the top position */
+    height: 400vw; 
+    border-radius: 50%; /* Forms the perfect circle shape */
+    
+    /* Create the color gradient, transitioning from red (center) to pink (edge) */
+    background: radial-gradient(
+        circle at center, 
+        var(--red-start) 0%, 
+        var(--pink-end) 40%, 
+        var(--pink-end) 50%, 
+        transparent 50% /* Make the rest of the circle transparent */
+    );
+    
+    /* Ensure the content is visible above the dark vignette */
+    z-index: 2; 
+}
+
+/* * ::after Pseudo-element: Creates the Soft Dark Vignette/Shadow Effect
+ * This uses a radial-gradient to create a soft, dark blur that gives depth.
+ */
+.highlight-band::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%; /* Cover the entire container height */
+    
+    /* Radial gradient for the soft shadow effect, fading from dark to transparent */
+    background: radial-gradient(
+        ellipse at top, 
+        rgba(0, 0, 0, 0.6) 0%, /* Dark shadow near the arc */
+        rgba(0, 0, 0, 0.4) 30%, 
+        rgba(0, 0, 0, 0) 70% /* Fades out smoothly */
+    );
+    
+    /* Blend the colors subtly */
+    mix-blend-mode: soft-light; 
+    z-index: 1; 
+}
+
+  </style>
+</head>
+<body>
+     <section class="highlight-container">
+    <div class="highlight-band">
+        </div>
+</section>
+
+  <!-- Header / Decorative hero band -->
+  <header class="hero" role="banner" aria-hidden="false">
+    <div class="container" style="position:relative;">
+      <!-- Title is visually in main content; hero contains only background visuals -->
+      <h1 style="position:absolute; left:-9999px; top:auto; width:1px; height:1px; overflow:hidden;">Site hero for visual only</h1>
+    </div>
+  </header>
+
+  <!-- Main content -->
+  <main class="container" role="main" aria-labelledby="trendingTitle" style="padding-top:96px;">
+    <!-- Section: Trending Now -->
+    <section aria-labelledby="trendingTitle" style="position:relative;">
+      <!-- Heading -->
+      <h2 id="trendingTitle" class="trending-header">Trending Now</h2>
+
+      <!-- Horizontal row of movie posters (semantic list of figures) -->
+      <div class="trending-row" role="list" aria-label="Trending movies">
+        <!-- Example movie items — replace src with real images -->
+        <article class="movie" role="listitem" tabindex="0" aria-label="The Bawds of Bollywood — position 1">
+          <img src="https://images.unsplash.com/photo-1524985069026-dd778a71c7b4?q=80&w=800&auto=format&fit=crop&ixlib=rb-4.0.3&s=placeholder" alt="Poster: The Bawds of Bollywood">
+          <div class="index">1</div>
+        </article>
+
+        <article class="movie" role="listitem" tabindex="0" aria-label="Narsimha — position 2">
+          <img src="https://images.unsplash.com/photo-1517604931442-3a1b9b0b86b3?q=80&w=800&auto=format&fit=crop&ixlib=rb-4.0.3&s=placeholder" alt="Poster: Narsimha">
+          <div class="index">2</div>
+        </article>
+
+        <article class="movie" role="listitem" tabindex="0" aria-label="Saiyaara — position 3">
+          <img src="https://images.unsplash.com/photo-1526778548025-fa2f459cd5c7?q=80&w=800&auto=format&fit=crop&ixlib=rb-4.0.3&s=placeholder" alt="Poster: Saiyaara">
+          <div class="index">3</div>
+        </article>
+
+        <article class="movie" role="listitem" tabindex="0" aria-label="War 2 — position 4">
+          <img src="https://images.unsplash.com/photo-1542204615-6b16fb3a9966?q=80&w=800&auto=format&fit=crop&ixlib=rb-4.0.3&s=placeholder" alt="Poster: War 2">
+          <div class="index">4</div>
+        </article>
+
+        <article class="movie" role="listitem" tabindex="0" aria-label="Turukshetra — position 5">
+          <img src="https://images.unsplash.com/photo-1517602302552-471fe67acf66?q=80&w=800&auto=format&fit=crop&ixlib=rb-4.0.3&s=placeholder" alt="Poster: Turukshetra">
+          <div class="index">5</div>
+        </article>
+
+        <article class="movie" role="listitem" tabindex="0" aria-label="Position 6">
+          <img src="https://images.unsplash.com/photo-1506104489822-1d7ee5d0f0c6?q=80&w=800&auto=format&fit=crop&ixlib=rb-4.0.3&s=placeholder" alt="Poster: Item 6">
+          <div class="index">6</div>
+        </article>
+
+        <!-- Add more .movie items as needed -->
+      </div>
+
+      <!-- Decorative right-side scroll pill to mimic the image's UI element -->
+      <div class="scroll-pill" aria-hidden="true">›</div>
+    </section>
+  </main>
+
+  <!-- Footer (optional minimal footer to finish layout) -->
+  <footer class="container" style="padding:48px 24px; color:rgba(255,255,255,0.12); font-size:13px;">
+    <!-- Footer kept minimal by design -->
+    <p style="margin:0;">© 2025 Demo layout — HTML & CSS clone</p>
+  </footer>
+</body>
+</html>
