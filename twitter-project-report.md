@@ -1,5 +1,3 @@
-Here’s your **complete and professional project report** for the *Twitter Website Clone (Frontend Landing Page)* — written in a structured, polished, and submission-ready format 👇
-
 ---
 
 ### **Project Report: Twitter Website Clone (Frontend Landing Page)**
