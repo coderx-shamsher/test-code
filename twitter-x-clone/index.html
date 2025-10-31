@@ -1,0 +1,234 @@
+<!-- HTML CODE HERE -->
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Home / X</title>
+
+
+
+
+    <!-- google fonts icon  -->
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+
+    <!-- tailwind css file here outputcss file  -->
+    <link rel="stylesheet" href="./Css/output.css">
+
+    <!-- custom css file here  -->
+    <link rel="stylesheet" href="./custom-css/style.css" />
+
+
+</head>
+
+<body>
+    <div class="layout">
+
+        <!-- LEFT NAVIGATION -->
+        <nav class="nav" aria-label="Primary">
+            <div class="nav__brand my-2">
+                <!-- Simple X logo SVG placeholder -->
+                <!-- <svg class="nav__logo" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+          <path d="M4 4 L20 20 M20 4 L4 20" stroke="#0f1419" stroke-width="2" stroke-linecap="round"/>
+        </svg> -->
+
+                <svg viewBox="0 0 24 24" aria-hidden="true"
+                    class="nav__logo r-4qtqp9 r-yyyyoo r-dnmrzs r-bnwqim r-lrvibr r-m6rgpd r-lrsllp r-18jsvk2 r-16y2uox r-8kz0gk">
+                    <g>
+                        <path
+                            d="M21.742 21.75l-7.563-11.179 7.056-8.321h-2.456l-5.691 6.714-4.54-6.714H2.359l7.29 10.776L2.25 21.75h2.456l6.035-7.118 4.818 7.118h6.191-.008zM7.739 3.818L18.81 20.182h-2.447L5.29 3.818h2.447z">
+                        </path>
+                    </g>
+                </svg>
+
+
+            </div>
+
+            <ul class="nav__list">
+
+
+
+                <li class="nav__item"><a class="nav__link nav__link--active" href="#">
+                        <span class="nav__icon icons-of-nav material-symbols-outlined  ">home</span>
+                        <span class="nav__label">Home</span></a></li>
+
+                <li class="nav__item"><a class="nav__link" href="#"><span
+                            class="nav__icon icons-of-nav material-symbols-outlined  "> search </span>
+                        <span class="nav__label">Explore</span></a></li>
+
+                <li class="nav__item"><a class="nav__link" href="#"><span
+                            class="nav__icon  icons-of-nav material-symbols-outlined ">Notifications</span>
+                        <span class="nav__label">Notifications</span></a></li>
+
+                <li class="nav__item"><a class="nav__link" href="#"><span
+                            class="nav__icon icons-of-nav material-symbols-outlined ">Message</span>
+                        <span class="nav__label">Messages</span></a></li>
+
+                <li class="nav__item"><a class="nav__link" href="#"><span
+                            class="nav__icon icons-of-nav material-symbols-outlined ">🤖</span>
+                        <span class="nav__label">Grok</span></a></li>
+
+                <li class="nav__item"><a class="nav__link" href="#"><span
+                            class="nav__icon icons-of-nav material-symbols-outlined ">👥</span>
+                        <span class="nav__label">Communities</span></a></li>
+
+                <li class="nav__item"><a class="nav__link" href="#"><span
+                            class="nav__icon icons-of-nav material-symbols-outlined ">⭐</span>
+                        <span class="nav__label">Premium</span></a></li>
+
+                <li class="nav__item"><a class="nav__link" href="#"><span
+                            class="nav__icon icons-of-nav material-symbols-outlined ">🙍</span>
+                        <span class="nav__label">Profile</span></a></li>
+
+                <li class="nav__item"><a class="nav__link" href="#"><span
+                            class="nav__icon icons-of-nav material-symbols-outlined ">⋯</span>
+                        <span class="nav__label">More</span></a></li>
+            </ul>
+
+            <div class="nav__cta">
+                <button class="btn btn--primary" type="button">Post</button>
+            </div>
+
+            <div class="nav__profile" aria-hidden="false">
+                <div class="nav__avatar">D</div>
+                <div class="nav__meta">
+                    <div class="nav__name">Dev</div>
+                    <div class="nav__handle">@Dev108429</div>
+                </div>
+                <button class="nav__more" aria-label="More options">⋯</button>
+            </div>
+        </nav>
+
+        <!-- MAIN CONTENT -->
+        <main class="feed" id="main" tabindex="-1">
+            <!-- Tabs -->
+            <header class="feed__tabs" role="tablist" aria-label="Feed tabs">
+                <button class="tab tab--active" role="tab" aria-selected="true">For you</button>
+                <button class="tab" role="tab">Following</button>
+            </header>
+
+            <!-- Composer -->
+            <section class="composer" aria-label="Create post">
+                <div class="composer__avatar" aria-hidden="true">D</div>
+                <form class="composer__form" action="#" method="post">
+                    <label class="visually-hidden" for="post-text">What's happening?</label>
+                    <textarea id="post-text" class="composer__input" placeholder="What's happening?"
+                        rows="2"></textarea>
+
+                    <div class="composer__row">
+                        <div class="composer__icons">
+                            <button class="icon-btn" type="button" aria-label="Add image">🖼️</button>
+                            <button class="icon-btn" type="button" aria-label="GIF">GIF</button>
+                            <button class="icon-btn" type="button" aria-label="Poll">📊</button>
+                            <button class="icon-btn" type="button" aria-label="Emoji">😊</button>
+                            <button class="icon-btn" type="button" aria-label="Schedule">🕒</button>
+                        </div>
+                        <div class="composer__actions">
+                            <button class="btn btn--secondary" type="button">Post</button>
+                        </div>
+                    </div>
+                </form>
+            </section>
+
+            <!-- Feed posts -->
+            <section class="posts" aria-label="Timeline">
+                <!-- Post 1 -->
+                <article class="post" aria-labelledby="post1-author" role="article">
+                    <img class="post__avatar" src="#" alt="Rahul Gandhi avatar" aria-hidden="true" />
+                    <div class="post__body">
+                        <div class="post__header">
+                            <div class="post__author" id="post1-author">Rahul Gandhi</div>
+                            <div class="post__meta">@RahulGandhi · Oct 29</div>
+                        </div>
+                        <div class="post__content">
+                            Trump is insulting Modi in country after country. Latest is South Korea.<br><br>
+                            1. Repeated that he used trade to frighten Modi into stopping Operation Sindoor.<br><br>
+                            2. Said 7 planes were shot down.<br><br>
+                            Don’t be scared Modi ji, find the courage to respond.
+                        </div>
+                        <div class="post__actions" aria-label="Post actions">
+                            <button class="action" type="button" aria-label="Reply">💬 3.6K</button>
+                            <button class="action" type="button" aria-label="Retweet">🔁 7.5K</button>
+                            <button class="action" type="button" aria-label="Like">❤ 27K</button>
+                            <button class="action" type="button" aria-label="Views">📈 2.4M</button>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Post 2 -->
+                <article class="post" aria-labelledby="post2-author" role="article">
+                    <img class="post__avatar" src="#" alt="Elon Musk avatar" aria-hidden="true" />
+                    <div class="post__body">
+                        <div class="post__header">
+                            <div class="post__author" id="post2-author">Elon Musk <span class="post__verified"
+                                    title="Verified">✔️</span></div>
+                            <div class="post__meta">@elonmusk · Oct 29</div>
+                        </div>
+                        <div class="post__content">
+                            Enough is enough
+                            <div class="post__quoted">
+                                <div class="quoted__author">Basil the Great · Oct 29</div>
+                                <div class="quoted__text">🚨 ABSOLUTELY HORRIFIC CALL 🚨 — A London woman calls in and
+                                    cries her eyes out in desperation…</div>
+                            </div>
+                        </div>
+                        <div class="post__actions" aria-label="Post actions">
+                            <button class="action" type="button" aria-label="Reply">💬 1.2K</button>
+                            <button class="action" type="button" aria-label="Retweet">🔁 4.8K</button>
+                            <button class="action" type="button" aria-label="Like">❤ 20K</button>
+                            <button class="action" type="button" aria-label="Views">📈 1.1M</button>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Add a few placeholder posts to echo feed density -->
+                <article class="post post--placeholder" aria-hidden="true">
+                    <div class="post__skeleton">More posts...</div>
+                </article>
+            </section>
+        </main>
+
+        <!-- RIGHT SIDEBAR -->
+        <aside class="aside" aria-label="Sidebar">
+            <div class="aside__search">
+                <label class="visually-hidden" for="search">Search</label>
+                <input id="search" class="aside__search-input" type="search" placeholder="Search" />
+            </div>
+
+            <div class="aside__card aside__premium" role="region" aria-label="Subscribe to Premium">
+                <h3 class="aside__card-title">Subscribe to Premium</h3>
+                <p class="aside__card-text">Subscribe to unlock new features and if eligible, receive a share of
+                    revenue.</p>
+                <button class="btn btn--primary">Subscribe</button>
+            </div>
+
+            <div class="aside__card aside__trending" role="region" aria-label="What's happening">
+                <h3 class="aside__card-title">What's happening</h3>
+                <ul class="trending__list">
+                    <li class="trending__item">
+                        <div class="trending__topic">श्री हरी</div>
+                        <div class="trending__count">39.2K posts</div>
+                    </li>
+                    <li class="trending__item">
+                        <div class="trending__topic">#AyushmanFor70plus</div>
+                        <div class="trending__count">1,266 posts</div>
+                    </li>
+                    <li class="trending__item">
+                        <div class="trending__topic">राम मंदिर</div>
+                        <div class="trending__count">6,094 posts</div>
+                    </li>
+                    <li class="trending__item">
+                        <div class="trending__topic">Sydney Sweeney</div>
+                        <div class="trending__count">64.2K posts</div>
+                    </li>
+                </ul>
+                <a class="trending__more" href="#">Show more</a>
+            </div>
+        </aside>
+
+    </div>
+</body>
+
+</html>
